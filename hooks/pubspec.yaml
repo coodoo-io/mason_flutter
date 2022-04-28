@@ -5,3 +5,4 @@ environment:
 
 dependencies:
   mason: any
+  io: ^1.0.3

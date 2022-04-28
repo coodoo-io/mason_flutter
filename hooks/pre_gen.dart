@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:io/io.dart';
 import 'package:mason/mason.dart';
 
 const mobilePlatforms = "ios,android";
@@ -7,10 +8,11 @@ const desktopPlatforms = "windows,linux,macos";
 const webPlatform = "web";
 
 Future<void> run(HookContext context) async {
+
   // Add an additional question if counterExample false
+  String sampleId = "custom.emptyApp.1";
   if (context.vars["counterExample"] == false) {
-    var answer = await context.logger.prompt("? Want to use a different Flutter Sample instead? (Enter ID from https://samples.flutter.de)", defaultValue: null);
-    context.logger.info("Sample Number: ${answer}");
+    sampleId = await context.logger.prompt("? Want to use a different Flutter Sample instead? (Enter ID from https://samples.flutter.de)", defaultValue: "custom.emptyApp.1");
   }
 
   // Define platforms
@@ -23,9 +25,14 @@ Future<void> run(HookContext context) async {
   }
 
   // Generate Flutter project via standard `flutter create`
-  context.logger.info('Creating your flutter app...');
-  var result = await Process.run('flutter',
-      ['create', '--suppress-analytics', '--org', '{{packageName}}', '{{projectName}}', '--platforms', platforms]);
+  var args = ['create', '--suppress-analytics', '--org', '{{packageName}}', '{{projectName}}', '--platforms', platforms];
+  if(sampleId.isNotEmpty && !sampleId.startsWith("custom")) {
+    args = [...args, '--sample', sampleId];
+    context.logger.info('Creating your flutter app with sample (${sampleId})...');
+  } else {
+    context.logger.info('Creating your flutter app...');
+  }
+  final result = await Process.run('flutter', args);
   stdout.write(result.stdout);
   stderr.write(result.stderr);
 
@@ -33,10 +40,6 @@ Future<void> run(HookContext context) async {
   if (context.vars["counterExample"] == false) {
     var currentDir = Directory.current;
     await File('${currentDir.path}/${context.vars["projectName"]}/lib/main.dart').delete();
-
-    // Maybe user wants a different sample
-    var answer = await context.logger.prompt("\x1b[A\u001B[2K Want to use a Flutter Sample instead?", defaultValue: null);
-    context.logger.info("Sample Number: ${answer}");
-    context.logger.info('Creating your flutter app...');
+    await copyPath("/Users/janmarsh/Programming/workspace/flutter/mason/flutter/samples/custom.emptyApp.1/", "/Users/janmarsh/Programming/workspace/flutter/mason/flutter/__brick__/");
   }
 }
