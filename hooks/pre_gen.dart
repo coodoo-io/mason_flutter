@@ -6,11 +6,12 @@ const desktopPlatforms = "windows,linux,macos";
 const webPlatform = "web";
 
 Future<void> run(HookContext context) async {
-  context.vars["useEmptySample"]=false;
+  context.vars["useEmptySample"] = false;
 
   // Validation app name
-  if(context.vars["projectName"].contains(RegExp(r'[A-Z]'))) {
-    return context.logger.err("App name must consist of lowercase, numbers or underscore characters (e.g. counter_app1).");
+  if (context.vars["projectName"].contains(RegExp(r'[A-Z]'))) {
+    return context.logger
+        .err("App name must consist of lowercase, numbers or underscore characters (e.g. counter_app1).");
   }
 
   // Add an additional question if counterExample false
@@ -18,7 +19,10 @@ Future<void> run(HookContext context) async {
   if (context.vars["counterExample"] == false) {
     sampleId = await context.logger.prompt(
         "? Want to use a Flutter Sample instead? (Enter ID from https://samples.flutter.de)",
-        defaultValue: null);
+        defaultValue: "No");
+    if (sampleId == "No") {
+      sampleId = null;
+    };
   }
 
   // Define platforms
@@ -31,16 +35,8 @@ Future<void> run(HookContext context) async {
   }
 
   // Generate Flutter project via standard `flutter create`
-  var args = [
-    'create',
-    '--suppress-analytics',
-    '--org',
-    '{{orgaName}}',
-    '{{projectName}}',
-    '--platforms',
-    platforms
-  ];
-  if (sampleId!=null && sampleId.isNotEmpty && !sampleId.startsWith("custom")) {
+  var args = ['create', '--suppress-analytics', '--org', '{{orgaName}}', '{{projectName}}', '--platforms', platforms];
+  if (sampleId != null && sampleId.isNotEmpty && !sampleId.startsWith("custom")) {
     args = [...args, '--sample', sampleId];
     context.logger.info('Creating your flutter app with sample (${sampleId})...');
   } else {
@@ -51,10 +47,21 @@ Future<void> run(HookContext context) async {
   stderr.write(result.stderr);
 
   // Optional: Remove Flutter counter example & use our default
-  if (context.vars["counterExample"] == false && sampleId==null) {
-    var currentDir = Directory.current;
-    final projectPath = "${currentDir.path}/${context.vars["projectName"]}";
+  final currentDir = Directory.current;
+  final projectPath = "${currentDir.path}/${context.vars["projectName"]}";
+  if (context.vars["counterExample"] == false && sampleId == null) {
     await File('$projectPath/lib/main.dart').delete();
-    context.vars["useEmptySample"]=true;
+    context.vars["useEmptySample"] = true;
   }
+
+  // Remove comments from pubspec.yaml
+  final pubspec = await File('$projectPath/pubspec.yaml');
+  List<String> lines = pubspec.readAsLinesSync();
+  List<String> newLines = [];
+  for (final String line in lines) {
+    if (!line.trimLeft().startsWith("#") && line !="\n") {
+      newLines.add(line);
+    }
+  }
+  await pubspec.writeAsString(newLines.join('\n'));
 }

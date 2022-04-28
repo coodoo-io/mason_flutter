@@ -9,6 +9,7 @@ Intended to ease the creation of new Flutter apps.
 * Easy way to use a Flutter sample. No more --list-samples=examples.json
 * Let users decide if they want web or desktop support
 * No more removing the debug banner
+* Remove all Comments from pubspec.yaml
 
 ## Getting Started 🚀
 
@@ -19,7 +20,7 @@ Intended to ease the creation of new Flutter apps.
 dart pub global activate mason_cli
 
 # Add Flutter brick from registry (global)
-mason add -g my_brick
+mason add -g flutter
 ```
 
 **Create a project:**
