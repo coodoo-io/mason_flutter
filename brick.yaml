@@ -12,11 +12,11 @@ vars:
     description: project name
     default: app
     prompt: "Name of your App? (lowercase, numbers, underscore)"
-  packageName:
+  orgName:
     type: string
-    description: package name
+    description: organisation name
     default: com.example
-    prompt: Package name?
+    prompt: What is the organization name?
   webSupport:
     type: boolean
     description: web support
