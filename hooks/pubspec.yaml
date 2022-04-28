@@ -5,5 +5,3 @@ environment:
 
 dependencies:
   mason: any
-  io: any
-  path: any

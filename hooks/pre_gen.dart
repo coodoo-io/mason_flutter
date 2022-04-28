@@ -1,8 +1,5 @@
 import 'dart:io';
-
-import 'package:io/io.dart';
 import 'package:mason/mason.dart';
-import 'package:path/path.dart';
 
 const mobilePlatforms = "ios,android";
 const desktopPlatforms = "windows,linux,macos";
@@ -51,7 +48,11 @@ Future<void> run(HookContext context) async {
     var currentDir = Directory.current;
     final projectPath = "${currentDir.path}/${context.vars["projectName"]}";
     await File('$projectPath/lib/main.dart').delete();
-    // print("TEST:" + dirname(Platform.script.path));
-    await copyPath("${dirname(Platform.script.path)}/samples/custom.emptyApp.1/", "${dirname(Platform.script.path)}/__brick__/");
+
+    if(sampleId == "custom.emptyApp.1") {
+      context.vars["useEmptySample"] = true;
+    } else {
+      
+    }
   }
 }
