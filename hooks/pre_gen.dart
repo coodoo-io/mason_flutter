@@ -2,17 +2,19 @@ import 'dart:io';
 
 import 'package:io/io.dart';
 import 'package:mason/mason.dart';
+import 'package:path/path.dart';
 
 const mobilePlatforms = "ios,android";
 const desktopPlatforms = "windows,linux,macos";
 const webPlatform = "web";
 
 Future<void> run(HookContext context) async {
-
   // Add an additional question if counterExample false
   String sampleId = "custom.emptyApp.1";
   if (context.vars["counterExample"] == false) {
-    sampleId = await context.logger.prompt("? Want to use a different Flutter Sample instead? (Enter ID from https://samples.flutter.de)", defaultValue: "custom.emptyApp.1");
+    sampleId = await context.logger.prompt(
+        "? Want to use a different Flutter Sample instead? (Enter ID from https://samples.flutter.de)",
+        defaultValue: "custom.emptyApp.1");
   }
 
   // Define platforms
@@ -25,8 +27,16 @@ Future<void> run(HookContext context) async {
   }
 
   // Generate Flutter project via standard `flutter create`
-  var args = ['create', '--suppress-analytics', '--org', '{{packageName}}', '{{projectName}}', '--platforms', platforms];
-  if(sampleId.isNotEmpty && !sampleId.startsWith("custom")) {
+  var args = [
+    'create',
+    '--suppress-analytics',
+    '--org',
+    '{{packageName}}',
+    '{{projectName}}',
+    '--platforms',
+    platforms
+  ];
+  if (sampleId.isNotEmpty && !sampleId.startsWith("custom")) {
     args = [...args, '--sample', sampleId];
     context.logger.info('Creating your flutter app with sample (${sampleId})...');
   } else {
@@ -39,7 +49,9 @@ Future<void> run(HookContext context) async {
   // Optional: Remove Flutter counter example
   if (context.vars["counterExample"] == false) {
     var currentDir = Directory.current;
-    await File('${currentDir.path}/${context.vars["projectName"]}/lib/main.dart').delete();
-    await copyPath("/Users/janmarsh/Programming/workspace/flutter/mason/flutter/samples/custom.emptyApp.1/", "/Users/janmarsh/Programming/workspace/flutter/mason/flutter/__brick__/");
+    final projectPath = "${currentDir.path}/${context.vars["projectName"]}";
+    await File('$projectPath/lib/main.dart').delete();
+    // print("TEST:" + dirname(Platform.script.path));
+    await copyPath("${dirname(Platform.script.path)}/samples/custom.emptyApp.1/", "${dirname(Platform.script.path)}/__brick__/");
   }
 }
