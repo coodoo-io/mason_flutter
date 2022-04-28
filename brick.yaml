@@ -1,0 +1,34 @@
+name: flutter
+description: A brick to create new flutter apps the easy way.
+
+version: 0.1.0+1
+
+environment:
+  mason: ">=0.1.0-dev <0.1.0"
+
+vars:
+  projectName:
+    type: string
+    description: project name
+    default: app
+    prompt: "Name of your App? (lowercase, numbers, underscore)"
+  packageName:
+    type: string
+    description: package name
+    default: com.example
+    prompt: Package name?
+  webSupport:
+    type: boolean
+    description: web support
+    default: true
+    prompt: Do you want Flutter Web?
+  desktopSupport:
+    type: boolean
+    description: desktop support
+    default: true
+    prompt: Do you want Flutter Desktop?
+  counterExample:
+    type: boolean
+    description: Remove Counter App
+    default: false
+    prompt: Do you want the Counter Example?
