@@ -8,6 +8,7 @@ Intended to ease the creation of new Flutter apps.
 * No more refactoring com.example. Package name is required when creating projects
 * Easy way to use a Flutter sample. No more --list-samples=examples.json
 * Let users decide if they want web or desktop support
+* No more removing the debug banner
 
 ## Getting Started 🚀
 
