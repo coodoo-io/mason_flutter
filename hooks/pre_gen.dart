@@ -1,9 +1,9 @@
 import 'dart:io';
 import 'package:mason/mason.dart';
 
-const mobilePlatforms = "ios,android";
-const desktopPlatforms = "windows,linux,macos";
-const webPlatform = "web";
+const mobilePlatforms = ["ios", "android"];
+const desktopPlatforms = ["windows","linux","macos"];
+const webPlatform = ["web"];
 
 Future<void> run(HookContext context) async {
   context.vars["useEmptySample"] = false;
@@ -26,19 +26,25 @@ Future<void> run(HookContext context) async {
   }
 
   // Define platforms
-  var platforms = mobilePlatforms;
+  var platforms = [];
   if (context.vars["mobileSupport"] == true) {
-    platforms += webPlatform + ",";
+    platforms.addAll(mobilePlatforms);
   }
   if (context.vars["webSupport"] == true) {
-    platforms += webPlatform + ",";
+    platforms.addAll(webPlatform);
   }
   if (context.vars["desktopSupport"] == true) {
-    platforms += desktopPlatforms + ",";
+    platforms.addAll(desktopPlatforms);
+  }
+
+  // Validation platforms
+  if (platforms.length==0) {
+    return context.logger.err("At least one platform must be selected.");
   }
 
   // Generate Flutter project via standard `flutter create`
-  var args = ['create', '--suppress-analytics', '--org', '{{orgaName}}', '{{projectName}}', '--platforms', platforms];
+  var args = ['create', '--suppress-analytics', '--org', '{{orgaName}}', '{{projectName}}', '--platforms', platforms.join(",")];
+  print(args);
   if (sampleId != null && sampleId.isNotEmpty && !sampleId.startsWith("custom")) {
     args = [...args, '--sample', sampleId];
     context.logger.info('Creating your flutter app with sample (${sampleId})...');
