@@ -17,6 +17,11 @@ vars:
     description: organisation name
     default: com.example
     prompt: What is the organization name?
+  mobileSupport:
+    type: boolean
+    description: mobile support
+    default: true
+    prompt: Do you want Flutter Mobile (iOS/Android)?
   webSupport:
     type: boolean
     description: web support

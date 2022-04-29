@@ -27,11 +27,14 @@ Future<void> run(HookContext context) async {
 
   // Define platforms
   var platforms = mobilePlatforms;
+  if (context.vars["mobileSupport"] == true) {
+    platforms += webPlatform + ",";
+  }
   if (context.vars["webSupport"] == true) {
-    platforms += "," + webPlatform;
+    platforms += webPlatform + ",";
   }
   if (context.vars["desktopSupport"] == true) {
-    platforms += "," + desktopPlatforms;
+    platforms += desktopPlatforms + ",";
   }
 
   // Generate Flutter project via standard `flutter create`
