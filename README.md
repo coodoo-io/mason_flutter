@@ -23,7 +23,8 @@ If you're like me and keep forgetting all the flutter command line arguments whi
 dart pub global activate mason_cli
 
 # Add Flutter brick from registry (global)
-mason add -g flutter
+mason add -g flutter --git-url https://github.com/JPM84/mason_flutter
+# mason add -g flutter (not possible, since flutter is a reserved word in brickhub.dev)
 ```
 
 **Create a project:**
