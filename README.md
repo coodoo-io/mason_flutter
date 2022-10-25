@@ -9,10 +9,10 @@ If you're like me and keep forgetting all the flutter command line arguments whi
 * Allow creation of empty flutter projects (e.g. no more deleting of counter app)
 * No more refactoring `com.example` (orgName is required during setup)
 * No more removing the debug banner
-* Not more removing all comments from pubspec.yaml
+* No more removing all comments from pubspec.yaml
 * Choose your platforms interactively (e.g. desktop, web) during setup
 * Picking one of the many Flutter sample projects (e.g. no more `--list-samples=examples.json`)
-* Nothing too fancy. Uses your flutter-cli under the hood
+* Nothing too fancy. Uses your Flutter-CLI under the hood
 
 ## Getting Started 🚀
 
