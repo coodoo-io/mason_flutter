@@ -1,7 +1,8 @@
 # 🧱 The Flutter Brick
 
 Intended to ease the creation of new Flutter apps.
-Hope I can delete it some day!
+
+If you're like me and keep forgetting all the flutter command line arguments while creating a new project, this interactive mason shell might help you. Hopefully the Flutter-CLI gets more interactive overtime, so I can delete this some day!
 
 ## Idea 💡
 
