@@ -1,4 +1,4 @@
-# 🧱 The `Flutter` Brick
+# 🧱 The Flutter Brick
 
 Intended to ease the creation of new Flutter apps.  
 Hope I can delete it some day!
@@ -11,7 +11,7 @@ Hope I can delete it some day!
 * Not more removing all comments from pubspec.yaml
 * Choose your platforms interactively (e.g. desktop, web) during setup
 * Enable picking one of the many Flutter sample projects (e.g. no more `--list-samples=examples.json`)
-* Nothing to custom. Uses standard flutter-cli under the hood
+* Nothing too fancy. Uses your flutter-cli under the hood
 
 ## Getting Started 🚀
 
