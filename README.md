@@ -1,6 +1,6 @@
 # 🧱 The Flutter Brick
 
-Intended to ease the creation of new Flutter apps.  
+Intended to ease the creation of new Flutter apps.
 Hope I can delete it some day!
 
 ## Idea 💡

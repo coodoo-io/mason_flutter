@@ -1,7 +1,7 @@
 name: flutter
 description: A brick to create new flutter apps the easy way.
-
-version: 0.1.0+1
+version: 0.1.0
+repository: https://github.com/JPM84/mason_flutter
 
 environment:
   mason: ">=0.1.0-dev.26 <0.1.0"
