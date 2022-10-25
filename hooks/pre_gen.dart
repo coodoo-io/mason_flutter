@@ -5,6 +5,7 @@ Future<void> run(HookContext context) async {
   final List<String> defaultPlatforms = ['android', 'ios'];
 
   // Context Variables
+  context.vars['useOurExample']=false;
   final String projectName = context.vars['projectName'].trim();
   final String orgName = context.vars['orgName'].toLowerCase().trim() ?? 'com.example';
   final bool useCounterExample = context.vars['useCounterExample'];
@@ -44,6 +45,7 @@ Future<void> run(HookContext context) async {
   final projectPath = '${Directory.current.path}/$projectName';
   if (useCounterExample == false && sampleId == null) {
     await File('$projectPath/lib/main.dart').delete();
+    context.vars['useOurExample']=true;
   }
 
   // After generation
