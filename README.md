@@ -10,7 +10,7 @@ Hope I can delete it some day!
 * No more removing the debug banner
 * Not more removing all comments from pubspec.yaml
 * Choose your platforms interactively (e.g. desktop, web) during setup
-* Enable picking one of the many Flutter sample projects (e.g. no more `--list-samples=examples.json`)
+* Picking one of the many Flutter sample projects (e.g. no more `--list-samples=examples.json`)
 * Nothing too fancy. Uses your flutter-cli under the hood
 
 ## Getting Started 🚀
