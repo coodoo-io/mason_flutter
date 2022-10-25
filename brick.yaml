@@ -4,35 +4,34 @@ description: A brick to create new flutter apps the easy way.
 version: 0.1.0+1
 
 environment:
-  mason: ">=0.1.0-dev <0.1.0"
+  mason: ">=0.1.0-dev.26 <0.1.0"
 
 vars:
   projectName:
     type: string
     description: project name
     default: app
-    prompt: "Name of your App? (lowercase, numbers, underscore)"
+    prompt: "Name of your App in snake_case?"
   orgName:
     type: string
     description: organisation name
     default: com.example
     prompt: What is the organization name?
-  mobileSupport:
-    type: boolean
-    description: mobile support
-    default: true
-    prompt: Do you want Flutter Mobile (iOS/Android)?
-  webSupport:
-    type: boolean
-    description: web support
-    default: true
-    prompt: Do you want Flutter Web?
-  desktopSupport:
-    type: boolean
-    description: desktop support
-    default: true
-    prompt: Do you want Flutter Desktop?
-  counterExample:
+  platforms:
+    type: array
+    description: supported platforms
+    prompt: Which platforms would you like to use?
+    defaults:
+      - android
+      - ios
+    values:
+      - android
+      - ios
+      - linux
+      - macos
+      - windows
+      - web
+  useCounterExample:
     type: boolean
     description: Remove Counter App
     default: false

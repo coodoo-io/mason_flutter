@@ -1,15 +1,17 @@
-# 🧱 Flutter Brick
+# 🧱 The `Flutter` Brick
 
-Intended to ease the creation of new Flutter apps.
+Intended to ease the creation of new Flutter apps.  
+Hope I can delete it some day!
 
 ## Idea 💡
 
 * Allow creation of empty flutter projects (e.g. no more deleting of counter app)
-* No more refactoring com.example. Package name is required when creating projects
-* Let users decide if they want web or desktop support
+* No more refactoring `com.example` (orgName is required during setup)
 * No more removing the debug banner
-* Remove all Comments from pubspec.yaml
-* Easy way to use a Flutter sample. No more --list-samples=examples.json
+* Not more removing all comments from pubspec.yaml
+* Choose your platforms interactively (e.g. desktop, web) during setup
+* Enable picking one of the many Flutter sample projects (e.g. no more `--list-samples=examples.json`)
+* Nothing to custom. Uses standard flutter-cli under the hood
 
 ## Getting Started 🚀
 
