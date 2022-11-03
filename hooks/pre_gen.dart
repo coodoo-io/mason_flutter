@@ -7,7 +7,7 @@ Future<void> run(HookContext context) async {
   // Context Variables
   context.vars['useOurExample']=false;
   final String projectName = context.vars['projectName'].trim();
-  final String orgName = context.vars['orgName'].toLowerCase().trim() ?? 'com.example';
+  final String orgName = context.vars['orgName'].toLowerCase().trim();
   final bool useCounterExample = context.vars['useCounterExample'];
   final List<dynamic> platforms = context.vars['platforms'] ?? defaultPlatforms;
 
@@ -30,7 +30,7 @@ Future<void> run(HookContext context) async {
   }
 
   // Generate Flutter project via standard `flutter create`
-  List<String> args = ['create', '--suppress-analytics', '--org', '{{orgName}}', '{{projectName}}', '--platforms', platforms.join(',')];
+  List<String> args = ['create', '--suppress-analytics', '--org', '$orgName', '$projectName', '--platforms', platforms.join(',')];
   if (sampleId != null && sampleId.isNotEmpty && !sampleId.startsWith('custom')) {
     args = [...args, '--sample', sampleId];
     context.logger.info('Creating your flutter app with sample (${sampleId})...');
